@@ -18,6 +18,7 @@ SBC-7112S(product name)-UARTTest(software name)-Qt4.8.5(linux version) = SBC-711
 ## SBC-7112S Qt Examples
 
 * [SBC-7112S-Backlight-Qt4.8.5](https://github.com/AplexOS/Qt-Examples/tree/SBC-7112S-Backlight-Qt4.8.5)
+* [SBC-7112S-FullTest-Qt4.8.5](https://github.com/AplexOS/Qt-Examples/tree/SBC-7112S-FullTest-Qt4.8.5)
 
 ## SBC-7112S-Q Qt Examples
 
