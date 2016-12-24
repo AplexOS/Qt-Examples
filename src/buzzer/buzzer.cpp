@@ -13,24 +13,6 @@ Buzzer::Buzzer(QWidget *parent) :
 	QWidget(parent),
     ui(new Ui::Buzzer)
 {
-    //int pd;
-    //char buf[32];
-
-    /*
-	pd = open("/proc/boardname", O_RDONLY);
-
-    if (read(pd, buf, 32) < 0){
-        perror("read error");
-		exit(1);
-	}
-    if (strncmp(buf,"OK335xD",7) == 0) {
-        QMessageBox::about(this,"error","this board doesn't have a buzzer");
-		exit(1);
-	}
-
-    ::close(pd);
-    */
-
     ui->setupUi(this);
 
     fd = open("/dev/buzzer", O_RDWR);

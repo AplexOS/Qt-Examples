@@ -14,20 +14,6 @@ CanTest::CanTest(QWidget *parent) :
     //char buf[32];
 
     ui->setupUi(this);
-#if 0
-    pd = open("/proc/boardname", O_RDONLY);
-
-   if (read(pd, buf, 32) < 0){
-               exit(1);
-       }
-
-    if (strncmp(buf,"OK335xS2",8) != 0) {
-        ui->can1->setDisabled(true);
-       }
-
-   ::close(pd);
-
-#endif
     btg = new QButtonGroup;
     btg->addButton(ui->can0,0);
     btg->addButton(ui->can1,1);
