@@ -2,7 +2,7 @@
 
 ## 1. Branch Namimg Specification
 
-* **branch namimg format**: (product name)-(software name)-(Qt version)
+* **branch namimg format**: (product name)\_(software name)\_(Qt version)
   * **product name**:
     * SBC-7112S;
     * SBC-7112S-Q;
@@ -11,7 +11,7 @@
     * Qt4.8.5;
     * Qt5.5;
 * **E.g:**  
-`SBC-7112S`(product name)`-UARTTest`(software name)`-Qt4.8.5`(linux version) = `SBC-7112S-UARTTest-Qt4.8.5`
+`SBC-7112S`(product name)`_UARTTest`(software name)`_Qt4.8.5`(linux version) = `SBC-7112S_UARTTest_Qt4.8.5`
 
 ## 2. Release Naming Specification
 
@@ -19,8 +19,8 @@
 
 ## 3. SBC-7112S Qt Examples
 
-1. [SBC-7112S-Backlight-Qt4.8.5](https://github.com/AplexOS/Qt-Examples/tree/SBC-7112S-Backlight-Qt4.8.5)
-2. [SBC-7112S-FullTest-Qt4.8.5](https://github.com/AplexOS/Qt-Examples/tree/SBC-7112S-FullTest-Qt4.8.5)
+1. [SBC-7112S_Backlight_Qt4.8.5](https://github.com/AplexOS/Qt-Examples/tree/SBC-7112S-Backlight-Qt4.8.5)
+2. [SBC-7112S_FullTest_Qt4.8.5](https://github.com/AplexOS/Qt-Examples/tree/SBC-7112S-FullTest-Qt4.8.5)
 
 ## 4. SBC-7112S-Q Qt Examples
 
