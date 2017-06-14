@@ -9,6 +9,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->tabWidget->setStyleSheet("QTabBar::tab { height: 50px; width: 125px; }");
+
     info = new Info();
     ui->tabWidget->addTab(info, "info");
 
@@ -42,8 +44,8 @@ MainWindow::MainWindow(QWidget *parent) :
     usb = new Usb();
     ui->tabWidget->addTab(usb, "usb");
 
-    //sd = new Sd();
-    //ui->tabWidget->addTab(sd, "SD");
+    sd = new Sd();
+    ui->tabWidget->addTab(sd, "SD");
 /*
     onoff = new OnOff();
     ui->tabWidget->addTab(onoff, "OnOff");

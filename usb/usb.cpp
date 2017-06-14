@@ -18,7 +18,7 @@ void Usb::on_pushButton_clicked()
     myprocess = new QProcess(this);
     connect(myprocess, SIGNAL(readyReadStandardOutput()),this, SLOT(result()));
     connect(myprocess, SIGNAL(readyReadStandardError()),this, SLOT(result()));
-    myprocess->start("lsusb");
+    myprocess->start("cat /proc/bus/input/devices");
     ui->result->clear();
 }
 void Usb::result()

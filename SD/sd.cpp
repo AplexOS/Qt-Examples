@@ -19,8 +19,8 @@ Sd::Sd(QWidget *parent) :
 
     ui->showDir->setModel(&model);
 
-    model.setRootPath("/media/mmcblk0p1");
-    ui->showDir->setRootIndex(model.index("/media/mmcblk0p1"));
+    model.setRootPath("/media/mmcblk1p1");
+    ui->showDir->setRootIndex(model.index("/media/mmcblk1p1"));
     // Demonstrating look and feel features
     ui->showDir->setAnimated(false);
     ui->showDir->setIndentation(20);
@@ -52,43 +52,43 @@ void Sd::on_detectButton_clicked()
     /**
      * simulate the hardware detect for sd
      */
-    int fd = open("/dev/sdDetect", O_RDWR);
-    ioctl(fd, SDDETECT, 1);
-    ::close(fd);
+    //int fd = open("/dev/sdDetect", O_RDWR);
+    //ioctl(fd, SDDETECT, 1);
+    //::close(fd);
 
-    sleep(6);
-    system("umount /media/mmcblk0p1");
+    //sleep(6);
+    system("umount /media/mmcblk1p1");
 
-    QFileInfo fileInfo("/dev/mmcblk0p1");
+    QFileInfo fileInfo("/dev/mmcblk1p1");
     if( fileInfo.exists() ) {
 
-        while(!QFileInfo("/media/mmcblk0p1").exists()) {
-            system("mkdir /media/mmcblk0p1");
-            qDebug() << "/dev/mmcblk0p1 exists" << endl;
+        while(!QFileInfo("/media/mmcblk1p1").exists()) {
+            system("mkdir /media/mmcblk1p1");
+            qDebug() << "/dev/mmcblk1p1 exists" << endl;
         }
 
-        system("mount /dev/mmcblk0p1 /media/mmcblk0p1");
+        system("mount /dev/mmcblk1p1 /media/mmcblk1p1");
         model.setRootPath("/media");
-        model.setRootPath("/media/mmcblk0p1");
-        ui->showDir->setRootIndex(model.index("/media/mmcblk0p1"));
-        qDebug() << "/dev/mmcblk0p1 exists" << endl;
+        model.setRootPath("/media/mmcblk1p1");
+        ui->showDir->setRootIndex(model.index("/media/mmcblk1p1"));
+        qDebug() << "/dev/mmcblk1p1 exists" << endl;
     } else {
 
         sleep(4);
-        while(!QFileInfo("/media/mmcblk0p1").exists()) {
-            system("mkdir /media/mmcblk0p1");
-            qDebug() << "/dev/mmcblk0p1 not exists" << endl;
+        while(!QFileInfo("/media/mmcblk1p1").exists()) {
+            system("mkdir /media/mmcblk1p1");
+            qDebug() << "/dev/mmcblk1p1 not exists" << endl;
         }
 
         model.setRootPath("/media");
-        model.setRootPath("/media/mmcblk0p1");
-        ui->showDir->setRootIndex(model.index("/media/mmcblk0p1"));
+        model.setRootPath("/media/mmcblk1p1");
+        ui->showDir->setRootIndex(model.index("/media/mmcblk1p1"));
         QMessageBox::warning(this, "WARNING", "Please check your SD card has plugin slot.");
-        qDebug() << "/dev/mmcblk0p1 not exists" << endl;
+        qDebug() << "/dev/mmcblk1p1 not exists" << endl;
     }
 }
 
 void Sd::on_umountButton_clicked()
 {
-    system("umount /dev/mmcblk0p1");
+    system("umount /dev/mmcblk1p1");
 }
