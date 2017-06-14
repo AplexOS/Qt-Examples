@@ -1,6 +1,6 @@
 #include "version.h"
 #include "ui_version.h"
-#include "interface.h"
+#include "../network/interface.h"
 
 
 version::version(QWidget *parent) :

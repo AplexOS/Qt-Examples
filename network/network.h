@@ -32,13 +32,13 @@ private:
     bool flag;
 public slots:
     void on_sel_changed(const QString &text);
-    void on_toggled(bool b);
+    void on_toggled();
     void on_ok_clicked();
     void refreshInterfaces();
     void readConfigs();
     void writeConfigs();
     void state(bool dhcp);
-    void proc_finished(int code);
+    void proc_finished();
 protected:
     void closeEvent(QCloseEvent * evt);
     void moveEvent(QMoveEvent *);

@@ -17,8 +17,8 @@ Network::Network(QWidget *parent) :
     flag = false;
     connect(ui->cb_interface, SIGNAL(currentIndexChanged(const QString &)), this, SLOT(on_sel_changed(QString)));
     connect(ui->ok, SIGNAL(clicked()), this, SLOT(on_ok_clicked()));
-    connect(ui->radio_dhcp, SIGNAL(toggled(bool)), this, SLOT(on_toggled(bool)));
-    connect(ui->radio_static, SIGNAL(toggled(bool)), this, SLOT(on_toggled(bool)));
+    connect(ui->radio_dhcp, SIGNAL(toggled(bool)), this, SLOT(on_toggled()));
+    connect(ui->radio_static, SIGNAL(toggled(bool)), this, SLOT(on_toggled()));
 
     refreshInterfaces();
     readConfigs();
@@ -30,7 +30,7 @@ Network::~Network()
 {
     delete ui;
     foreach(Interface *i,ints)
-        delete i;
+    delete i;
 }
 
 void Network::state(bool dhcp)
@@ -193,7 +193,7 @@ void Network::writeConfigs()
     m.close();
 }
 
-void Network::on_toggled(bool b)
+void Network::on_toggled()
 {
     Interface *i = NULL;
     foreach(i,ints)
@@ -273,7 +273,7 @@ void Network::on_ok_clicked()
 
     proc->start("/etc/init.d/networking restart");
 
-    connect(proc,SIGNAL(finished(int)),this,SLOT(proc_finished(int)));
+    connect(proc,SIGNAL(finished(int)),this,SLOT(proc_finished()));
 
     this->setDisabled(true);
 
@@ -305,7 +305,7 @@ void Network::resizeEvent(QResizeEvent *)
     this->showMaximized();
 }
 
-void Network::proc_finished(int code)
+void Network::proc_finished()
 {
     if(proc->exitStatus() == QProcess::NormalExit)
     {

@@ -26,10 +26,10 @@ SOURCES += main.cpp\
     watchdog/watchdog.cpp \
     can/thread.cpp \
     can/canTest.cpp \
-    qipaddressedititem.cpp \
-    qipaddressedit.cpp \
-    network.cpp \
-    interface.cpp \
+    network/qipaddressedititem.cpp \
+    network/qipaddressedit.cpp \
+    network/network.cpp \
+    network/interface.cpp \
     audio/audio.cpp \
     backlight/backlight.cpp \
     rtc/rtcTest.cpp \
@@ -37,8 +37,8 @@ SOURCES += main.cpp\
     burncpu/parser.cpp \
     burncpu/burnCpu.cpp \
     gpio/myGpio.cpp \
-    version.cpp \
-    dpifconfig.cpp
+    version/version.cpp \
+    ifconfig/dpifconfig.cpp
 
 HEADERS  += mainwindow.h \
     led.h \
@@ -54,10 +54,10 @@ HEADERS  += mainwindow.h \
     watchdog/watchdog.h \
     can/thread.h \
     can/canTest.h \
-    qipaddressedititem.h \
-    qipaddressedit.h \
-    network.h \
-    interface.h \
+    network/qipaddressedititem.h \
+    network/qipaddressedit.h \
+    network/network.h \
+    network/interface.h \
     audio/audio.h \
     backlight/backlight.h \
     rtc/rtcTest.h \
@@ -65,8 +65,8 @@ HEADERS  += mainwindow.h \
     burncpu/parser.h \
     burncpu/burnCpu.h \
     gpio/myGpio.h \
-    version.h \
-    dpifconfig.h
+    version/version.h \
+    ifconfig/dpifconfig.h
 
 FORMS    += mainwindow.ui \
     led/led.ui \
@@ -79,14 +79,14 @@ FORMS    += mainwindow.ui \
     uart/uart.ui \
     watchdog/watchdog.ui \
     can/canTest.ui \
-    network.ui \
+    network/network.ui \
     audio/audio.ui \
     backlight/backlight.ui \
     rtc/rtcTest.ui \
     info/info.ui \
     burncpu/burnCpu.ui \
     gpio/myGpio.ui \
-    version.ui \
-    dpifconfig.ui
+    version/version.ui \
+    ifconfig/dpifconfig.ui
 
 OTHER_FILES +=

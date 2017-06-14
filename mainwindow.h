@@ -22,8 +22,8 @@
 #include "./audio/audio.h"
 #include "./rtc/rtcTest.h"
 //#include "./burncpu/burnCpu.h"
-#include "version.h"
-#include "dpifconfig.h"
+#include "./version/version.h"
+#include "./ifconfig/dpifconfig.h"
 
 
 namespace Ui {

@@ -255,7 +255,7 @@
   <customwidget>
    <class>QIpAddressEdit</class>
    <extends>QWidget</extends>
-   <header>qipaddressedit.h</header>
+   <header>network/qipaddressedit.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
