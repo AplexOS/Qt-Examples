@@ -5,26 +5,98 @@
 #include <QPushButton>
 #include <QGroupBox>
 
-#include "./info/info.h"
-#include "./led/led.h"
-#include "./gpio/myGpio.h"
-#include "./buzzer/buzzer.h"
-#include "./backlight/backlight.h"
-#include "./eeprom/eeprom.h"
-#include "./network/network.h"
-#include "./ping/ping.h"
-#include "./usb/usb.h"
-#include "./SD/sd.h"
-//#include "./OnOff/onoff.h"
-#include "./uart/uart.h"
-#include "./watchdog/watchdog.h"
-#include "./can/canTest.h"
-#include "./audio/audio.h"
-#include "./rtc/rtcTest.h"
-//#include "./burncpu/burnCpu.h"
-#include "./version/version.h"
-#include "./ifconfig/dpifconfig.h"
 
+#define __APLEX_QT_INFO__
+#define __APLEX_QT_LED__
+#define __APLEX_QT_GPIO__
+#define __APLEX_QT_BUZZER__
+#define __APLEX_QT_BACKLIGHT__
+#define __APLEX_QT_EEPROM__
+#define __APLEX_QT_NETWORK__
+#define __APLEX_QT_PING__
+#define __APLEX_QT_USB__
+#define __APLEX_QT_SD__
+#define __APLEX_QT_UART__
+//#define __APLEX_QT_WATCHDOG__
+#define __APLEX_QT_CANTEST__
+//#define __APLEX_QT_AUDIO__
+#define __APLEX_QT_RTCTEST__
+#define __APLEX_QT_IFCONFIG__
+//#define __APLEX_QT_VERSION__
+//#define __APLEX_QT_PERF__
+
+#ifdef __APLEX_QT_INFO__
+#include "./info/info.h"
+#endif
+
+#ifdef __APLEX_QT_LED__
+#include "./led/led.h"
+#endif
+
+#ifdef __APLEX_QT_GPIO__
+#include "./gpio/myGpio.h"
+#endif
+
+#ifdef __APLEX_QT_BUZZER__
+#include "./buzzer/buzzer.h"
+#endif
+
+#ifdef __APLEX_QT_BACKLIGHT__
+#include "./backlight/backlight.h"
+#endif
+
+#ifdef __APLEX_QT_EEPROM__
+#include "./eeprom/eeprom.h"
+#endif
+
+#ifdef __APLEX_QT_NETWORK__
+#include "./network/network.h"
+#endif
+
+#ifdef __APLEX_QT_PING__
+#include "./ping/ping.h"
+#endif
+
+#ifdef __APLEX_QT_USB__
+#include "./usb/usb.h"
+#endif
+
+#ifdef __APLEX_QT_SD__
+#include "./SD/sd.h"
+#endif
+
+#ifdef __APLEX_QT_UART__
+#include "./uart/uart.h"
+#endif
+
+#ifdef __APLEX_QT_WATCHDOG__
+#include "./watchdog/watchdog.h"
+#endif
+
+#ifdef __APLEX_QT_CANTEST__
+#include "./can/canTest.h"
+#endif
+
+#ifdef __APLEX_QT_AUDIO__
+#include "./audio/audio.h"
+#endif
+
+#ifdef __APLEX_QT_RTCTEST__
+#include "./rtc/rtcTest.h"
+#endif
+
+#ifdef __APLEX_QT_VERSION__
+#include "./version/version.h"
+#endif
+
+#ifdef __APLEX_QT_IFCONFIG__
+#include "./ifconfig/dpifconfig.h"
+#endif
+
+#ifdef __APLEX_QT_PERF__
+#include "./OnOff/onoff.h"
+#include "./burncpu/burnCpu.h"
+#endif
 
 namespace Ui {
 class MainWindow;
@@ -43,56 +115,80 @@ public:
 
 public:
 
+#ifdef __APLEX_QT_INFO__
     Info *info;
+#endif
 
+#ifdef __APLEX_QT_LED__
     Led *led;
+#endif
 
+#ifdef __APLEX_QT_GPIO__
     MyGpio *gpio;
+#endif
 
+#ifdef __APLEX_QT_BUZZER__
     Buzzer *buzzer;
+#endif
 
+#ifdef __APLEX_QT_BACKLIGHT__
     Backlight *backlight;
+#endif
 
+#ifdef __APLEX_QT_EEPROM__
     Eeprom *eeprom;
+#endif
 
+#ifdef __APLEX_QT_NETWORK__
     Network *network;
+#endif
 
+#ifdef __APLEX_QT_PING__
     Ping *ping;
+#endif
 
+#ifdef __APLEX_QT_RTCTEST__
     RtcTest *rtc;
+#endif
 
+#ifdef __APLEX_QT_USB__
     Usb *usb;
+#endif
 
+#ifdef __APLEX_QT_USB__
     Sd *sd;
+#endif
 
-//    OnOff *onoff;
-
-//    BurnCpu *burnCpu;
-
+#ifdef __APLEX_QT_UART__
     Uart *uart;
+#endif
 
+#ifdef __APLEX_QT_WATCHDOG__
     Watchdog *watchdog;
+#endif
 
+#ifdef __APLEX_QT_CANTEST__
     CanTest *can;
+#endif
 
+#ifdef __APLEX_QT_AUDIO__
     Audio *audio;
+#endif
 
+#ifdef __APLEX_QT_IFCONFIG__
     dpifconfig *aplex_ifconfig;
+#endif
 
+#ifdef __APLEX_QT_VERSION__
     version *version1;
+#endif
+
+#ifdef __APLEX_QT_PERF__
+      OnOff *onoff;
+      BurnCpu *burnCpu;
+#endif
 
 private slots:
-//    void on_tabWidget_currentChanged(QWidget *arg1);
-
-//    void on_tabWidget_currentChanged(int index);
-
-//    void on_tabWidget_selected(const QString &arg1);
-
-//    void on_tabWidget_tabCloseRequested(int index);
-
-//    void on_tabWidget_destroyed();
-
-//    void on_tabWidget_destroyed(QObject *arg1);
 
 private:
     Ui::MainWindow *ui;
