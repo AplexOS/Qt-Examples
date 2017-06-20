@@ -16,11 +16,9 @@ Audio::~Audio()
 
 void Audio::on_pushButton_clicked()
 {
-
     // system("mkdir /tmp/usb_disk");
     // system("umount /tmp/usb_disk");
     // system("mount /dev/sda1 /tmp/usb_disk");
-
 
     qDebug() << "aplay /home/root/sbc-7109-test.wav &" << endl;
     system("aplay  /home/root/sbc-7109-test.wav &");

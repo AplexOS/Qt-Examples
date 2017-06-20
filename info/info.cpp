@@ -7,11 +7,12 @@ Info::Info(QWidget *parent) :
     ui(new Ui::Info)
 {
     ui->setupUi(this);
-     myprocess = NULL;
+    myprocess = NULL;
 }
 
 Info::~Info()
 {
+    delete myprocess;
     delete ui;
 }
 

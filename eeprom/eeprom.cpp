@@ -37,8 +37,8 @@ Eeprom::Eeprom(QWidget *parent) :
 
 Eeprom::~Eeprom()
 {
+    ::close(fd);
     delete ui;
-	::close(fd);
 }
 
 void Eeprom::writemsg()

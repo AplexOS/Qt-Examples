@@ -11,10 +11,17 @@ MyInputPanel::MyInputPanel()
     punctuation = 0;
     pun_flag = false;
     ui->setupUi(this);
+
     connect(qApp, SIGNAL(focusChanged(QWidget*,QWidget*)),
             this, SLOT(saveFocusWidget(QWidget*,QWidget*)));
     keyMapping();
 
+}
+MyInputPanel::~MyInputPanel()
+{
+//  disconnect(signalMapper, 0, 0, 0);
+    disconnect(qApp, 0, 0, 0);
+    delete ui;
 }
 
 bool MyInputPanel::event(QEvent *e)

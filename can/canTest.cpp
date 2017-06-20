@@ -10,35 +10,17 @@ CanTest::CanTest(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::CanTest)
 {
-    //int pd;
-    //char buf[32];
-
     ui->setupUi(this);
-#if 0
-    pd = open("/proc/boardname", O_RDONLY);
 
-   if (read(pd, buf, 32) < 0){
-               exit(1);
-       }
-
-    if (strncmp(buf,"OK335xS2",8) != 0) {
-        ui->can1->setDisabled(true);
-       }
-
-   ::close(pd);
-
-#endif
     btg = new QButtonGroup;
     btg->addButton(ui->can0,0);
     btg->addButton(ui->can1,1);
-
-    //startcan(0);
 }
 
 CanTest::~CanTest()
 {
-    delete ui;
     stopcan(btg->checkedId());
+    delete ui;
 }
 
 void CanTest::msg(QString str)
@@ -48,20 +30,41 @@ void CanTest::msg(QString str)
 
 void CanTest::on_send_clicked()
 {
-    struct can_frame frame;
-    std::string  str=ui->edit->text().toStdString();
+    char interface[10] = "can0";
+    int family = PF_CAN, type = SOCK_RAW, proto = CAN_RAW, s, ret;
+    struct sockaddr_can can_addr;
+    struct can_frame my_frame;
+    struct ifreq my_ifr;
+    std::string  str = ui->edit->text().toStdString();
 
-    if(str.length() > 8)
-    {
-        QMessageBox::about(this,"error","length of send string must less than 8 bytes");
-        return;
+    s = ::socket(family, type, proto);
+    if (s < 0) {
+        perror("socket");
     }
 
-    frame.can_id = 0x7ff;
-    strcpy((char*)frame.data,str.c_str());
-    frame.can_dlc = str.length();
+    can_addr.can_family = family;
+    strcpy(my_ifr.ifr_name, interface);
+    if (ioctl(s, SIOCGIFINDEX, &my_ifr)) {
+        perror("ioctl");
+    }
+    can_addr.can_ifindex = my_ifr.ifr_ifindex;
 
-    sendto(socket,&frame,sizeof(struct can_frame),0,(struct sockaddr*)&addr,sizeof(addr));
+    if (bind(s, (struct sockaddr *)&can_addr, sizeof(can_addr)) < 0) {
+        perror("bind");
+    }
+
+    my_frame.can_id = 0x7ff;
+    strcpy((char*)my_frame.data, str.c_str());
+    my_frame.can_dlc = str.length();
+
+    my_frame.can_id &= CAN_SFF_MASK;
+
+    ret = write(s, &my_frame, sizeof(my_frame));
+    if (ret == -1) {
+        perror("write");
+    }
+
+    ::close(s);
 }
 
 void CanTest::moveEvent(QMoveEvent *)
@@ -88,12 +91,10 @@ void CanTest::startcan(int v)
 
     if(v == 0)
     {
-        //system("canconfig can0 bitrate 125000 ctrlmode triple-sampling on");
         system("canconfig can0 start");
     }
     else
     {
-        //system("canconfig can1 bitrate 125000 ctrlmode triple-sampling on");
         system("canconfig can1 start");
     }
 

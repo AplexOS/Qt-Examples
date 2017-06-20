@@ -110,8 +110,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+#ifdef __APLEX_QT_INFO__
+    delete info;
+#endif
 #ifdef __APLEX_QT_LED__
     delete led;
+#endif
+
+#ifdef __APLEX_QT_GPIO__
+    delete gpio;
 #endif
 
 #ifdef __APLEX_QT_BUZZER__
@@ -128,6 +135,10 @@ MainWindow::~MainWindow()
 
 #ifdef __APLEX_QT_NETWORK__
     delete network;
+#endif
+
+#ifdef __APLEX_QT_IFCONFIG__
+    delete aplex_ifconfig;
 #endif
 
 #ifdef __APLEX_QT_PING__

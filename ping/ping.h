@@ -32,7 +32,6 @@ protected:
     void closeEvent(QCloseEvent *);
     void moveEvent(QMoveEvent *);
     void resizeEvent(QResizeEvent *);
-
 };
 
 #endif // MAINWINDOW_H

@@ -10,17 +10,18 @@ Uart::Uart(QWidget *parent) :
 
     connect(&testTimer,SIGNAL(timeout()),this,SLOT(SotSetTime()));
 
-
     autosend_flag = 0;
     auto_send_flag = 0;
     receive_flag = 1;
     count = 0;
-     receive_flag = 1;
+    receive_flag = 1;
+
     testTimer.start(1);
 }
 
 Uart::~Uart()
 {
+    testTimer.stop();
     ::close(fd);
     delete ui;
 }
@@ -28,18 +29,20 @@ Uart::~Uart()
 
 int Uart::open_uart_port(int fd,int comport)
 {
-        if (comport==1)
-        {    fd = open( "/dev/ttyO0", O_RDWR|O_NOCTTY|O_NDELAY);
-            if (-1 == fd)
-            {
-                ui->label->setText("open uart port error");
-                return(-1);
-            }
-            else
-            {
-                printf("open ttyO0 .....\n");
-            }
+    if (comport==1)
+    {
+        fd = open( "/dev/ttyO1", O_RDWR|O_NOCTTY|O_NDELAY);
+        if (-1 == fd)
+        {
+            ui->label->setText("open uart port error");
+            return(-1);
         }
+        else
+        {
+            printf("open ttyO1 .....\n");
+        }
+    }
+#if 0
         else if(comport==2)
         {    fd = open( "/dev/ttyO1", O_RDWR|O_NOCTTY|O_NDELAY);
             if (-1 == fd)
@@ -79,26 +82,27 @@ int Uart::open_uart_port(int fd,int comport)
                 printf("open ttyO4 .....\n");
             }
         }
+#endif
 
-        if(fcntl(fd, F_SETFL, 0)<0)
-        {
-            printf("fcntl failed!\n");
-        }
-        else
-        {
-            printf("fcntl=%d\n",fcntl(fd, F_SETFL,0));
-        }
-        //判断便准输入是否是一个终端的设备
-        if(isatty(STDIN_FILENO)==0)
-        {
-            printf("standard input is not a terminal device\n");
-        }
-        else
-        {
-            printf("isatty success!\n");
-        }
-        printf("fd-open=%d\n",fd);
-        return fd;
+    if(fcntl(fd, F_SETFL, 0)<0)
+    {
+        printf("fcntl failed!\n");
+    }
+    else
+    {
+        printf("fcntl=%d\n",fcntl(fd, F_SETFL,0));
+    }
+    //判断便准输入是否是一个终端的设备
+    if(isatty(STDIN_FILENO)==0)
+    {
+        printf("standard input is not a terminal device\n");
+    }
+    else
+    {
+        printf("isatty success!\n");
+    }
+    printf("fd-open=%d\n",fd);
+    return fd;
 }
 int Uart::set_uart_opt(int fd,int nSpeed, int nBits, char nEvent, int nStop)
 {
@@ -221,19 +225,7 @@ void Uart::on_pushButton_send_clicked()
         ui->label->setText(value);
         return ;
     }
-    /*
-    for (i =0; i < 10; i++)
-    {
-        count++;
-        buffer[i] = count;
-    }
-    value = "";
-    value = QString::number(buffer[0],16) + " "+ QString::number(buffer[1],16) + " ";
-    value += QString::number(buffer[2],16) + " " +QString::number(buffer[3],16) + " " ;
-    value += QString::number(buffer[4],16) + " " +QString::number(buffer[5],16) + " " ;
-    value += QString::number(buffer[6],16) + " " +QString::number(buffer[7],16) + " " ;
-    value += QString::number(buffer[8],16) + " " +QString::number(buffer[9],16) + " " ;
-    */
+
     ui->label->setText("0123456789");
     write(fd,"0123456789\r\n",12);
 }
@@ -285,7 +277,7 @@ void Uart::on_pushButton_open_clicked()
     switch(tmp)
     {
         case 0: comport = 1; break;
-        case 1: comport = 2; break;
+        //case 1: comport = 2; break;
         //case 2: comport = 3; break;
         //case 3: comport = 4; break;
     }
@@ -330,7 +322,6 @@ void Uart::on_pushButton_open_clicked()
         if((fd=open_uart_port(fd,comport))<0)
         {
             fd  = 0;
-
             return;
         }
         re = set_uart_opt(fd,baudrate,nbit,parity,nstop);

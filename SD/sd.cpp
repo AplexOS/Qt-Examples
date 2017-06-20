@@ -30,6 +30,7 @@ Sd::Sd(QWidget *parent) :
 
 Sd::~Sd()
 {
+    ::system("umount  /media/mmcblk1p1");
     delete ui;
 }
 void Sd::moveEvent(QMoveEvent *)
@@ -57,17 +58,17 @@ void Sd::on_detectButton_clicked()
     //::close(fd);
 
     //sleep(6);
-    system("umount /media/mmcblk1p1");
+    ::system("umount /media/mmcblk1p1");
 
     QFileInfo fileInfo("/dev/mmcblk1p1");
     if( fileInfo.exists() ) {
 
         while(!QFileInfo("/media/mmcblk1p1").exists()) {
-            system("mkdir /media/mmcblk1p1");
+            ::system("mkdir /media/mmcblk1p1");
             qDebug() << "/dev/mmcblk1p1 exists" << endl;
         }
 
-        system("mount /dev/mmcblk1p1 /media/mmcblk1p1");
+        ::system("mount /dev/mmcblk1p1 /media/mmcblk1p1");
         model.setRootPath("/media");
         model.setRootPath("/media/mmcblk1p1");
         ui->showDir->setRootIndex(model.index("/media/mmcblk1p1"));
@@ -76,7 +77,7 @@ void Sd::on_detectButton_clicked()
 
         sleep(4);
         while(!QFileInfo("/media/mmcblk1p1").exists()) {
-            system("mkdir /media/mmcblk1p1");
+            ::system("mkdir /media/mmcblk1p1");
             qDebug() << "/dev/mmcblk1p1 not exists" << endl;
         }
 
@@ -90,5 +91,5 @@ void Sd::on_detectButton_clicked()
 
 void Sd::on_umountButton_clicked()
 {
-    system("umount /dev/mmcblk1p1");
+    ::system("umount /media/mmcblk1p1");
 }

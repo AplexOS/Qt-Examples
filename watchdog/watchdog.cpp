@@ -19,8 +19,8 @@ Watchdog::Watchdog(QWidget *parent) :
 
 Watchdog::~Watchdog()
 {
-    delete ui;
     ::close(fd);
+    delete ui;
 }
 
 void Watchdog::timerEvent(QTimerEvent *)

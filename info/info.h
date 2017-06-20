@@ -42,7 +42,6 @@ private:
     Ui::Info *ui;
      QProcess *myprocess;
      void mouseMoveEvent ( QMouseEvent  * e );
-
 };
 
 #endif // MAINWINDOW_H

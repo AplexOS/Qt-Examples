@@ -23,14 +23,15 @@ Network::Network(QWidget *parent) :
     refreshInterfaces();
     readConfigs();
     on_sel_changed(ui->cb_interface->currentText());
-
 }
 
 Network::~Network()
 {
-    delete ui;
     foreach(Interface *i,ints)
-    delete i;
+    {
+        delete i;
+    }
+    delete ui;
 }
 
 void Network::state(bool dhcp)
@@ -271,7 +272,7 @@ void Network::on_ok_clicked()
 
     proc = new QProcess(this);
 
-    proc->start("/etc/init.d/networking restart");
+    proc->start("/etc/init.d/S40network restart");
 
     connect(proc,SIGNAL(finished(int)),this,SLOT(proc_finished()));
 

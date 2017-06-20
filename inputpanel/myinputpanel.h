@@ -14,6 +14,7 @@ class MyInputPanel : public QWidget
     
 public:
      MyInputPanel();
+     ~MyInputPanel();
      QWidget *getFocusedWidget();//获取有光标且需要输入的窗口指针
 
 signals:

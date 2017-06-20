@@ -20,8 +20,6 @@ private slots:
 
 private:
     Ui::Led *ui;
-
-
 };
 
 #endif // LED_H

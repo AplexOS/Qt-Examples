@@ -91,22 +91,7 @@
        </property>
        <item>
         <property name="text">
-         <string>ttyO0</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
          <string>ttyO1</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>ttyO2</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>ttyO4</string>
         </property>
        </item>
       </widget>

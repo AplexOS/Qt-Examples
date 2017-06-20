@@ -24,10 +24,8 @@ Buzzer::~Buzzer()
 {
     system("echo 0 > /sys/class/pwm/pwmchip1/pwm0/enable");
     system(" echo 0 > /sys/class/pwm/pwmchip1/unexport");
-	delete ui;
+    delete ui;
 }
-
-
 
 /* set duty_cycle  */
 void Buzzer::set_buzzer_freq(int freq)

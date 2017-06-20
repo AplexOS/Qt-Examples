@@ -13,7 +13,6 @@ namespace Ui {
 class BurnCpu;
 }
 
-
 //bool runFlag = true;
 class HeatMachineThread : public QThread
 {
@@ -23,7 +22,6 @@ public:
 private:
     void run()
     {
-
         qDebug() << "enter while -----";
         while ( runState ) {
             if (runState == false)

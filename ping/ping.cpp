@@ -13,6 +13,7 @@ Ping::Ping(QWidget *parent) :
 
 Ping::~Ping()
 {
+    delete myprocess;
     delete ui;
 }
 

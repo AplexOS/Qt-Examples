@@ -31,7 +31,6 @@ class Uart : public QWidget
 {
     Q_OBJECT
     
-
 public:
     explicit Uart(QWidget *parent = 0);
     int open_uart_port(int fd,int comport);

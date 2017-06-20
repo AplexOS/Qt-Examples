@@ -11,21 +11,23 @@ RtcTest::RtcTest(QWidget *parent) :
     ui(new Ui::RtcTest)
 {
     ui->setupUi(this);
-    connect(&testTimer,SIGNAL(timeout()),this,SLOT(SotSetTime()));
+
+    connect(&testTimer, SIGNAL(timeout()), this, SLOT(SotSetTime()));
     testTimer.start(1000);
     set_flag = 0;
-     y_i =0;
-     m_i = 0;
+    y_i = 0;
+    m_i = 0;
     d_i = 0;
     h_i = 0;
     mi_i = 0;
     s_i = 0;
     set_id = 0;
-     y=m=d=h=mi=s=0;
+    y = m = d = h = mi = s = 0;
 }
 
 RtcTest::~RtcTest()
 {
+    testTimer.stop();
     delete ui;
 }
 
@@ -33,6 +35,7 @@ void RtcTest::SotSetTime()
 {
     QDate d = QDate::currentDate();
     QTime t = QTime::currentTime();
+
     if (set_flag == 0)
     {
         ui->pushButton_y->setText(QString::number(d.year()));
@@ -46,14 +49,16 @@ void RtcTest::SotSetTime()
 void RtcTest::on_pushButton_10_clicked()
 {
     QString value;
-     char buf[128];
-     memset(buf,0,128);
+    char buf[128];
+    memset(buf,0,128);
+
     if (set_flag == 0)
     {
          set_flag = 1;
+
          ui->pushButton_10->setText("Set ON");
          ui->label->setText(" ");
-         y=m=d=h=mi=s=0;
+         y = m = d = h = mi = s = 0;
          ui->pushButton_y->setText("");
          ui->pushButton_m->setText("");
          ui->pushButton_d->setText("");
@@ -91,11 +96,11 @@ void RtcTest::on_pushButton_10_clicked()
             ui->pushButton_10->setText("Set OFF");
             sprintf(buf,"date -s '%4d-%02d-%02d %02d:%02d:%02d'",y,m,d,h,mi,s);
             system(buf);
-             system("hwclock -w");
-            system("/etc/init.d/save-rtc.sh");
+            system("hwclock -w");
+            //system("/etc/init.d/save-rtc.sh");
         }
         ui->label->setText(value);
-        y=m=d=h=mi=s=0;
+        y = m = d = h = mi = s = 0;
         ui->pushButton_y->setText("");
         ui->pushButton_m->setText("");
         ui->pushButton_d->setText("");
@@ -109,11 +114,11 @@ void RtcTest::on_pushButton_10_clicked()
 void RtcTest::on_pushButton_y_clicked()
 {
     if (set_flag == 1)
-     {
-            set_id = YY;
-            y_i  = 0;
-            ui->pushButton_y->setText(" ");
-            y = 0;
+    {
+        set_id = YY;
+        y_i  = 0;
+        ui->pushButton_y->setText(" ");
+        y = 0;
     }
 }
 
@@ -121,10 +126,10 @@ void RtcTest::on_pushButton_m_clicked()
 {
     if (set_flag == 1)
     {
-            set_id = MO;
-            m_i  = 0;
-            ui->pushButton_m->setText(" ");
-            m = 0;
+        set_id = MO;
+        m_i  = 0;
+        ui->pushButton_m->setText(" ");
+        m = 0;
     }
 }
 
@@ -132,10 +137,10 @@ void RtcTest::on_pushButton_d_clicked()
 {
     if (set_flag == 1)
     {
-            set_id = DD;
-            d_i  = 0;
-            ui->pushButton_d->setText(" ");
-            d = 0;
+        set_id = DD;
+        d_i = 0;
+        ui->pushButton_d->setText(" ");
+        d = 0;
     }
 }
 
@@ -143,10 +148,10 @@ void RtcTest::on_pushButton_h_clicked()
 {
     if (set_flag == 1)
     {
-            set_id = HH;
-            h_i = 0;
-            ui->pushButton_h->setText(" ");
-            h =0;
+        set_id = HH;
+        h_i = 0;
+        ui->pushButton_h->setText(" ");
+        h = 0;
     }
 }
 
@@ -154,10 +159,10 @@ void RtcTest::on_pushButton_mi_clicked()
 {
     if (set_flag == 1)
     {
-            set_id = MI;
-            mi_i = 0;
-            ui->pushButton_mi->setText(" ");
-            mi = 0;
+        set_id = MI;
+        mi_i = 0;
+        ui->pushButton_mi->setText(" ");
+        mi = 0;
     }
 }
 
@@ -165,10 +170,10 @@ void RtcTest::on_pushButton_s_clicked()
 {
     if (set_flag == 1)
     {
-            set_id = SS;
-            s_i = 0;
-            ui->pushButton_s->setText(" ");
-            s = 0;
+        set_id = SS;
+        s_i = 0;
+        ui->pushButton_s->setText(" ");
+        s = 0;
     }
 }
 
@@ -176,6 +181,7 @@ void RtcTest::on_pushButton_1_clicked()
 {
     if (set_flag == 0)
         return;
+
     switch(set_id)
     {
         case YY:  if (y_i < 4)
@@ -199,6 +205,7 @@ void RtcTest::on_pushButton_2_clicked()
 {
     if (set_flag == 0)
         return;
+
     switch(set_id)
     {
         case YY:  if (y_i < 4)
@@ -220,6 +227,7 @@ void RtcTest::on_pushButton_3_clicked()
 {
     if (set_flag == 0)
         return;
+
     switch(set_id)
     {
         case YY:  if (y_i < 4)
@@ -241,6 +249,7 @@ void RtcTest::on_pushButton_4_clicked()
 {
     if (set_flag == 0)
         return;
+
     switch(set_id)
     {
         case YY:  if (y_i < 4)
@@ -262,6 +271,7 @@ void RtcTest::on_pushButton_6_clicked()
 {
     if (set_flag == 0)
         return;
+
     switch(set_id)
     {
         case YY:  if (y_i < 4)
@@ -283,6 +293,7 @@ void RtcTest::on_pushButton_5_clicked()
 {
     if (set_flag == 0)
         return;
+
     switch(set_id)
     {
         case YY:  if (y_i < 4)
@@ -304,6 +315,7 @@ void RtcTest::on_pushButton_7_clicked()
 {
     if (set_flag == 0)
         return;
+
     switch(set_id)
     {
         case YY:  if (y_i < 4)
@@ -325,6 +337,7 @@ void RtcTest::on_pushButton_8_clicked()
 {
     if (set_flag == 0)
         return;
+
     switch(set_id)
     {
         case YY:  if (y_i < 4)
@@ -345,6 +358,7 @@ void RtcTest::on_pushButton_9_clicked()
 {
     if (set_flag == 0)
         return;
+
     switch(set_id)
     {
         case YY:  if (y_i < 4)
@@ -367,6 +381,7 @@ void RtcTest::on_pushButton_0_clicked()
 {
     if (set_flag == 0)
         return;
+
     switch(set_id)
     {
         case YY:  if (y_i < 4)
