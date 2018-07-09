@@ -51,8 +51,10 @@ Onoff::Onoff(QWidget *parent) :
     qfile.reset();
     qfile.seek(0);
     qfile.write(pline.toLatin1());
+    qfile.flush();
     qfile.close();
     system("sync");
+    sleep(3);
 }
 
 Onoff::~Onoff()
@@ -62,6 +64,7 @@ Onoff::~Onoff()
 
 void Onoff::add_startup_program()
 {
+#if 1
     QFile qfile( ONOFF_STARTUP_FILE );
     if(!qfile.open(QIODevice::ReadWrite | QIODevice::Text)) {
         qDebug()<<"Can't open the file!"<<endl;
@@ -71,8 +74,19 @@ void Onoff::add_startup_program()
     qfile.reset();
     qfile.seek(0);
     qfile.write("[Desktop Entry]\n");
-    qfile.write("Exec=/usr/share/utils\n");
+    qfile.write("Name=QT5 utils\n");
+    qfile.write("Exec=/usr/bin/qt-test-utils\n");
+    qfile.write("Icon=utils.png\n");
+    qfile.write("Terminal=false\n");
+    qfile.write("Type=Application\n");
+    qfile.write("X-MB-SingleInstance=true\n");
+    qfile.write("Comment=QT5 utils\n");
+    qfile.write("StartupNotify=false\n");
+    qfile.flush();
     qfile.close();
+#else
+    system("cp /usr/share/applications/utils.desktop /etc/xdg/autostart/onoff.desktop");
+#endif
     system("sync");
 }
 
