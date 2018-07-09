@@ -1,30 +1,73 @@
 #include "usb.h"
 #include "ui_usb.h"
+#include <sys/ioctl.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <QFileInfo>
+#include <QMessageBox>
+#include <QTreeView>
+#include <QDir>
+#include <QDebug>
+
 
 Usb::Usb(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Usb)
 {
     ui->setupUi(this);
+
+    ui->show_dir->setModel(&model);
+
+    model.setRootPath("/media/sda1");
+    ui->show_dir->setRootIndex(model.index("/media/sda1"));
+    // Demonstrating look and feel features
+    ui->show_dir->setAnimated(false);
+    ui->show_dir->setIndentation(20);
+    ui->show_dir->setSortingEnabled(true);
+    ui->show_dir->setColumnWidth(0, 250);
 }
 
 Usb::~Usb()
 {
+    ::system("umount /dev/sda1");
+    ::system("sync");
     delete ui;
+
 }
 
-void Usb::on_pushButton_clicked()
+void Usb::on_button_mount_clicked()
 {
-    myprocess = new QProcess(this);
-    connect(myprocess, SIGNAL(readyReadStandardOutput()),this, SLOT(result()));
-    connect(myprocess, SIGNAL(readyReadStandardError()),this, SLOT(result()));
-    myprocess->start("cat /proc/bus/input/devices");
-    ui->result->clear();
+    ::system("umount /media/sda1");
+
+    QFileInfo fileInfo("/dev/sda1");
+    if( fileInfo.exists() ) {
+
+        while(!QFileInfo("/media/sda1").exists()) {
+            ::system("mkdir /media/sda1");
+            qDebug() << "/dev/sda1 exists" << endl;
+        }
+
+        ::system("mount /dev/sda1 /media/sda1");
+        model.setRootPath("/media");
+        model.setRootPath("/media/sda1");
+        ui->show_dir->setRootIndex(model.index("/media/sda1"));
+        qDebug() << "/dev/sda1 exists" << endl;
+    } else {
+
+        sleep(2);
+        while(!QFileInfo("/media/sda1").exists()) {
+            ::system("mkdir /media/sda1");
+            qDebug() << "/dev/sda1 not exists" << endl;
+        }
+
+        model.setRootPath("/media/sda1");
+        ui->show_dir->setRootIndex(model.index("/media/sda1"));
+        QMessageBox::warning(this, "WARNING", "Please check your SD card has plugin slot.");
+        qDebug() << "/dev/sda1 not exists" << endl;
+    }
 }
-void Usb::result()
+
+void Usb::on_button_umount_clicked()
 {
-    QString abc = myprocess->readAllStandardOutput();
-    ui->result->append(abc.trimmed());
-    QString efg = myprocess->readAllStandardError();
-    if(efg.length()>1)ui->result->append(efg.trimmed());
+    ::system("umount /media/sda1");
 }

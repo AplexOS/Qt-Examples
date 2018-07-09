@@ -2,7 +2,7 @@
 #define USB_H
 
 #include <QWidget>
-#include <QProcess>
+#include <QFileSystemModel>
 
 namespace Ui {
 class Usb;
@@ -17,11 +17,13 @@ public:
     ~Usb();
     
 private slots:
-    void on_pushButton_clicked();
-    void result();
+    void on_button_mount_clicked();
+
+    void on_button_umount_clicked();
+
 private:
     Ui::Usb *ui;
-    QProcess *myprocess;
+    QFileSystemModel model;
 };
 
 #endif // MAINWINDOW_H

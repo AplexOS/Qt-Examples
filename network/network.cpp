@@ -27,6 +27,11 @@ Network::Network(QWidget *parent) :
 
 Network::~Network()
 {
+    if(proc)
+        delete proc;
+
+    ::system("sync");
+
     foreach(Interface *i,ints)
     {
         delete i;
@@ -78,7 +83,7 @@ void Network::refreshInterfaces()
         }
     }
     f.close();
-
+    ::system("sync");
     ui->cb_interface->addItems(sl);
 }
 
@@ -105,6 +110,7 @@ void Network::readConfigs()
             }
         }
         f.close();
+        ::system("sync");
     }
 }
 
@@ -192,6 +198,7 @@ void Network::writeConfigs()
 
     r.close();
     m.close();
+    ::system("sync");
 }
 
 void Network::on_toggled()
@@ -272,6 +279,7 @@ void Network::on_ok_clicked()
 
     proc = new QProcess(this);
 
+    //::system("/etc/init.d/S40network restart");
     proc->start("/etc/init.d/S40network restart");
 
     connect(proc,SIGNAL(finished(int)),this,SLOT(proc_finished()));
@@ -312,6 +320,6 @@ void Network::proc_finished()
     {
         this->setDisabled(false);
         flag = false;
-         QMessageBox::about(this,"info","network restart ok!");
+        QMessageBox::about(this,"info","network restart ok!");
     }
 }

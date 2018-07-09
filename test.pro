@@ -41,7 +41,6 @@ SOURCES += main.cpp\
     ifconfig/dpifconfig.cpp
 
 HEADERS  += mainwindow.h \
-    led.h \
     led/led.h \
     buzzer/buzzer.h \
     eeprom/eeprom.h \
