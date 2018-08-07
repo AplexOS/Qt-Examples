@@ -33,6 +33,9 @@ Backlight::Backlight(QWidget *parent) :
         cmdline_finder=strstr(buf,"sin0");
         if(cmdline_finder!=NULL)
             pwm_chno=0;
+        cmdline_finder=strstr(buf,"spl0");
+        if(cmdline_finder!=NULL)
+            pwm_chno=0;
         qDebug() << COMMAND_LINE << " : " << pwm_chno;
     }
 
