@@ -190,6 +190,7 @@ void Network::writeConfigs()
                 *t2<<QString("nameserver ")+i->dns<<QString("\n");//同时写入到/etc/resolv.conf
             }
         }
+        f.flush();
         f.close();
     }
 
